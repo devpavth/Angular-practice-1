@@ -1,0 +1,14 @@
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <strong>Ready to create an app?</strong>
+    <p>Hello, {{username}}</p>
+    <button [disabled]="isButtonDisabled">click me</button>
+    <button (click)="updateUsername()">update name</button>
+
+    <!-- data binding -->
+    <label for="name">Enter name:</label>
+    <input [(ngModel)]="name" type="text">
+    <button (click)="submit()">submit</button>
+    <p>Welcome, {{name}}</p>
+  </div>
+</ion-content>

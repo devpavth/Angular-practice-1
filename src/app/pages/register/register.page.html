@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Template-driven Forms</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <h1>Template-driven Forms:</h1>
+  <p>Explanation: You define forms directly in your template using directives like ngModel for two-way data binding.</p>
+  <h1>Registration Form</h1>
+  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+    <p>Form Status: {{userForm.status}}</p>
+    <p>Form data: {{userForm.value | json}}</p>
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name"
+      [(ngModel)]="user.name" #nameField="ngModel" required>
+
+      <div *ngIf="nameField.invalid && nameField.touched" style="color: red;">
+        <small>Name is required</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="email">Email</label>
+      <input type="text" name="email" id="email"
+      [(ngModel)]="user.email" #emailField="ngModel" required email>
+
+      <div *ngIf="emailField.invalid && emailField.touched" style="color: red;">
+        <small *ngIf="emailField.errors?.['required']">Email is required</small>
+        <small *ngIf="emailField.errors?.['email']">Invalid email address</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" 
+      [(ngModel)]="user.password" minlength="6" required #passwordField="ngModel"> 
+
+      <div *ngIf="passwordField.invalid && passwordField.touched" style="color: red;">
+        <small *ngIf="passwordField.errors?.['required']">Password is required.</small>
+        <small *ngIf="passwordField.errors?.['minlength']">Password must be at least 6 characters long.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" name="confirmPassword" id="confirmPassword" 
+      [(ngModel)]="user.confirmPassword" #confirmPasswordField="ngModel" required>
+
+      <div *ngIf="confirmPasswordField.touched && user.password !== user.confirmPassword" style="color: red;">
+        <small>
+          Passwords do not match
+        </small>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="userForm.invalid || user.password !== user.confirmPassword" class="submit-btn">Submit</button>
+  </form>
+</ion-content>

@@ -1,0 +1,15 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>product</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-product [product]="selectedProduct"  (studentSelect)="onStudentSelect($event)" [event]="eventData" (productClicked)="handleEventData($event)"></app-product>
+  <p>Selected Student name: {{selectedStudent?.name}}</p>
+  <p>Selected Student amount: {{selectedStudent?.amount}}</p>
+  <p>Selected Student department: {{selectedStudent?.department}}</p>
+  <p>Event person name: {{eventDetails?.name}}</p>
+  <p>Event initial price: {{eventDetails?.price}}</p>
+  <app-structural-directives></app-structural-directives>
+</ion-content>

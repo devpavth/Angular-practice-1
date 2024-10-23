@@ -1,0 +1,36 @@
+<div>
+  <h1>Welcome to the App!</h1>
+  <button (click)="toggleLogin()">Toggle Login</button>
+  <p *ngIf="isLoginIn">You are logged in!</p>
+  <p *ngIf="!isLoginIn">Please login to access this content.</p>
+</div>
+
+<div>
+  <h2>User profile</h2>
+  <button (click)="toggleProfile()">Toggle profile</button>
+
+  <div *ngIf="isProfileVisible; else noProfile">
+    <h2>Profile information</h2>
+    <p>Name: John Doe</p>
+    <p>Email: johndoegmail.com</p>
+    <p>Location: USA</p>
+  </div>
+
+  <ng-template #noProfile>
+    <p>User Profile is hidden. Please click the button to show the Profile.</p>
+  </ng-template>
+</div>
+
+<div>
+  <h3>select view type</h3>
+  <button (click)="setView('grid')">Grid view</button>
+  <button (click)="setView('list')">List view</button>
+  <button (click)="setView('table')">Table view</button>
+
+  <div [ngSwitch]="viewType">
+    <p *ngSwitchCase="'grid'">You selected a grid view</p>
+    <p *ngSwitchCase="'list'">You selected a list view</p>
+    <p *ngSwitchCase="'table'">You selected a table view</p>
+    <p *ngSwitchDefault>Please select a view type.</p>
+  </div>
+</div>

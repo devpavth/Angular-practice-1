@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Reactive Forms</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <h1>Reactive Forms</h1>
+  <p>Explanation: You manage forms programmatically in the component using form controls and form groups.</p>
+  <h2>Reactive Registration Form</h2>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Name</label>
+      <input type="text" id="name" formControlName="name">
+
+      <div *ngIf="formControls?.['name']?.errors?.['required'] && formControls?.['name']?.touched" style="color: red;">
+        <small>Name is required</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="email">Email:</label>
+      <input type="text" id="email" formControlName="email">
+
+      <div *ngIf="formControls?.['email']?.errors?.['required'] && formControls?.['email']?.touched" style="color: red;">
+        <small>Email is required</small>
+      </div>
+      <div *ngIf="formControls?.['email']?.errors?.['email'] && formControls?.['email']?.touched" style="color: red;">
+        <small>Invalid email address.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password">
+
+      <div *ngIf="formControls?.['password']?.errors?.['required'] && formControls?.['password']?.touched" style="color: red;">
+        <small>Password is required.</small>
+      </div>  
+
+      <div *ngIf="formControls?.['password']?.errors?.['minlength'] && formControls?.['password']?.touched" style="color: red;">
+        <small>Password must be atleast 6 characters long.</small>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="registrationForm.invalid">Submit</button>
+  </form>
+</ion-content>
